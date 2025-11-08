@@ -1,0 +1,38 @@
+# docker-compose.yml
+services:
+  # MongoDB - for your Feedback API
+  mongodb:
+    image: mongo:7
+    container_name: feedback-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  # Jaeger - for OpenTelemetry tracing (optional but great for observability)
+  jaeger:
+    image: jaegertracing/all-in-one:1.60
+    container_name: feedback-jaeger
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: unless-stopped
+
+ # Seq - structured logging UI (optional alternative to console logs)
+  seq:
+    image: datalust/seq:latest  # ✅ Use 'latest' instead of 2024.4
+    container_name: feedback-seq
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq_data:/data
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+  seq_data:

@@ -18,26 +18,35 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(routes),
     importProvidersFrom(
+      // AuthModule.forRoot({
+      //   domain: 'dev-t5gd-xu5.us.auth0.com', // e.g., dev-xxxx.us.auth0.com
+      //   clientId: 'KVZpOl35JRQozfhrqJuAzyu4WnYF8sRz',
+      //   authorizationParams: {
+      //     redirect_uri: window.location.origin + '/callback',
+      //     audience: environment.auth0Audience,
+      //   },
+      // })
       AuthModule.forRoot({
-        domain: 'dev-t5gd-xu5.us.auth0.com', // e.g., dev-xxxx.us.auth0.com
-        clientId: 'KVZpOl35JRQozfhrqJuAzyu4WnYF8sRz',
+        domain: environment.auth0Domain,
+        clientId: environment.auth0ClientId,
         authorizationParams: {
           redirect_uri: window.location.origin + '/callback',
           audience: environment.auth0Audience,
-          // audience: 'https://myapp-api', // ← your custom API identifier
-          // scope: 'openid profile email',
         },
-        // httpInterceptor: {
-        //   allowedList: [
-        //     {
-        //       uri: environment.apiUrl + '/*',
-        //       tokenOptions: {
-        //         audience: environment.auth0Audience,
-        //         scope: 'read:messages',
-        //       },
-        //     },
-        //   ],
-        // },
+        httpInterceptor: {
+          allowedList: [
+            {
+              uri: environment.apiUrl + '/*',
+              tokenOptions: {
+                authorizationParams: {
+                  audience: environment.auth0Audience,
+                  scope: 'read:profile write:data',
+                },
+                // scope: 'read:profile write:data',
+              },
+            },
+          ],
+        },
       })
     ),
   ],

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,18 @@ builder.Services.AddOpenApi();
 // });
 
 // Configure Auth0 authentication
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+//         options.Audience = builder.Configuration["Auth0:Audience"];
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ClockSkew = TimeSpan.Zero // Default: 5 min
+//         };
+//     });
+
+// Configure JWT Bearer Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -31,13 +44,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Audience = builder.Configuration["Auth0:Audience"];
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ClockSkew = TimeSpan.Zero // Default: 5 min
+            ClockSkew = TimeSpan.Zero, // Default: 5 min
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
         };
     });
 
+// Configure Authorization policies
+builder.Services.AddAuthorization(options =>
+{
+    // Default policy requires authentication
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
 
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
+    // Admin policy
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("https://schemas.auth0.com/roles", "admin"));
+
+    // Specific role requirements
+    options.AddPolicy("HasRole", policy =>
+        policy.RequireClaim("https://schemas.auth0.com/roles"));
+});
+
+// builder.Services.AddAuthentication();
+// builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 builder.Services.AddCors(o => o.AddPolicy("AllowLocalAngular", policy =>
@@ -50,6 +83,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
 }
 

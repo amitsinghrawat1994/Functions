@@ -17,18 +17,20 @@ services:
     ports:
       - "6831:6831/udp"
       - "16686:16686"
+      - "4317:4317"  # ← Add OTLP gRPC port
     environment:
       - COLLECTOR_OTLP_ENABLED=true
     restart: unless-stopped
 
  # Seq - structured logging UI (optional alternative to console logs)
   seq:
-    image: datalust/seq:latest  # ✅ Use 'latest' instead of 2024.4
+    image: datalust/seq:latest
     container_name: feedback-seq
     ports:
       - "5341:80"
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=MyLocalPassword123!
     volumes:
       - seq_data:/data
     restart: unless-stopped

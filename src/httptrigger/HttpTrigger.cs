@@ -24,12 +24,14 @@ public class HttpTrigger
     public async Task<ActionResult> SubmitFeedback([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "feedback")] HttpRequest req)
 
     {
+
         // return new OkObjectResult("Welcome to Azure Functions!");
         _logger.LogInformation("C# HTTP trigger function processed a request.");
 
         try
         {
             var feedback = await req.ReadFromJsonAsync<Feedback>();
+            _logger.LogInformation("Processing feedback from {@Email}", feedback.Email);
 
             if (feedback is null ||
             string.IsNullOrWhiteSpace(feedback.Name) ||

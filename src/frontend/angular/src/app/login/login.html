@@ -1,0 +1,11 @@
+<div class="login-container">
+  <h2>Welcome</h2>
+  <div *ngIf="!(auth.isAuthenticated$ | async)">
+    <button (click)="login()" class="btn btn-primary">Login/Register</button>
+  </div>
+
+  <div *ngIf="auth.isAuthenticated$ | async" class="user-info">
+    <p>Hello, {{ (auth.user$ | async)?.name }}!</p>
+    <button (click)="logout()" class="btn btn-secondary">Logout</button>
+  </div>
+</div>

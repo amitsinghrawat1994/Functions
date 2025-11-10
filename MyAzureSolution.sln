@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "submit_feedback_http_trigge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "src\api\api.csproj", "{130EEA6A-F370-45A8-A416-7BCC16A96CDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerDemo", "src\TimerDemo\TimerDemo.csproj", "{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,18 @@ Global
 		{130EEA6A-F370-45A8-A416-7BCC16A96CDB}.Release|x64.Build.0 = Release|Any CPU
 		{130EEA6A-F370-45A8-A416-7BCC16A96CDB}.Release|x86.ActiveCfg = Release|Any CPU
 		{130EEA6A-F370-45A8-A416-7BCC16A96CDB}.Release|x86.Build.0 = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|x64.Build.0 = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Debug|x86.Build.0 = Debug|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|x64.ActiveCfg = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|x64.Build.0 = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|x86.ActiveCfg = Release|Any CPU
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +64,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EA5C784A-12B0-4901-82A9-C9E60A15EB2A} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{130EEA6A-F370-45A8-A416-7BCC16A96CDB} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{A89AC5EB-C5EA-4CDE-843E-A68BFA7EC976} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

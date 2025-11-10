@@ -1,2 +1,10 @@
+# Visual Studio 2015 cache/options directory
+.vs/
 src/api/bin
 src/api/obj
+
+# Azurite local storage emulator files
+__blobstorage__
+__queuestorage__
+__tablestorage__
+__azurite_db*
